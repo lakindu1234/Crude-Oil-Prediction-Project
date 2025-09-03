@@ -5,7 +5,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the trained model
-with open("crude_oil.pkl", "rb") as f:
+with open("C:\Users\ASUS\Desktop\ML\Crude-Oil-Prediction-Project\server\crude_oil_prediction.pkl", "rb") as f:
     model = pickle.load(f)
 
 @app.route('/predict', methods=['POST'])
