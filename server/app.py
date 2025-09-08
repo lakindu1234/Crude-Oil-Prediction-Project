@@ -4,28 +4,44 @@ import pickle
 import numpy as np
 import os
 
-app = Flask(__name__)
-CORS(app)  # ✅ allow cross-origin requests
+class CrudeOilPredictionApp:
+    def __init__(self):
+        # Initialize Flask app
+        self.app = Flask(__name__)
+        CORS(self.app)  # Allow cross-origin requests
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "crude_oil_prediction.pkl")
+        # Setup model path
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(base_dir, "crude_oil_prediction.pkl")
 
-with open(MODEL_PATH, "rb") as f:
-    model = pickle.load(f)
+        # Load model
+        with open(model_path, "rb") as f:
+            self.model = pickle.load(f)
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    data = request.get_json()
-    year = data.get('year')
-    month = data.get('month')
+        # Define routes
+        self.app.add_url_rule("/predict", view_func=self.predict, methods=["POST"])
 
-    if year is None or month is None:
-        return jsonify({"error": "Please provide both year and month"}), 400
+    def predict(self):
+        data = request.get_json()
+        year = data.get("year")
+        month = data.get("month")
 
-    features = np.array([[year, month]])
-    prediction = model.predict(features)
+        if year is None or month is None:
+            return jsonify({"error": "Please provide both year and month"}), 400
 
-    return jsonify({"predicted_price": float(prediction[0])})
+        try:
+            # Prepare features
+            features = np.array([[year, month]])
+            prediction = self.model.predict(features)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+            return jsonify({"predicted_price": float(prediction[0])})
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+    def run(self):
+        self.app.run(debug=True)
+
+
+if __name__ == "__main__":
+    app_instance = CrudeOilPredictionApp()
+    app_instance.run()
