@@ -9,5 +9,4 @@ This is a Web application that predicts Crude oil Prices based on historical dat
 
 ## 📂 Project Structure
 
-
-
+<img width="313" height="542" alt="image" src="https://github.com/user-attachments/assets/57fbd82d-d7c9-4c24-9ced-eb218a3709a6" />
