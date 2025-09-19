@@ -1,4 +1,4 @@
-<img width="301" height="734" alt="image" src="https://github.com/user-attachments/assets/fb92bed8-6a11-47e2-ba1a-a527b4e00035" /># Crude-Oil-Prediction-Project
+# Crude-Oil-Prediction-Project
 
 
 This is a Web application that predicts Crude oil Prices based on historical data and various economic indicators. The model is trained on a dataset. I used flask for backend and html , css, js for the frontend. I hopes to host this backend in AWS and frontend in Vercel.
@@ -8,4 +8,6 @@ This is a Web application that predicts Crude oil Prices based on historical dat
 
 
 ## 📂 Project Structure
+
+
 
